@@ -162,7 +162,7 @@ VerificaTimeout(){
 
 
 Scroll(){
-	MouseMove, 650, 250
+	MouseMove, 779, 565
 	count = 0
 	Loop{
 		Send {WheelDown}
@@ -178,7 +178,7 @@ Scroll(){
 
 Start(){
 	
-	MouseMove, 700, 350, 10
+	MouseMove, 997, 538, 10
 	Sleep, 200
 	Send, {LButton}
 	Sleep, 500
@@ -343,7 +343,7 @@ tentativas = 0
 
 Xis(){
 	
-	MouseMove, 750, 190, 10
+	MouseMove, 1030, 353, 10
 	Sleep, 200
 	Send, {LButton}
 	Sleep, 500
@@ -351,7 +351,7 @@ Xis(){
 
 Voltar(){
 	
-	MouseMove, 260, 120, 10
+	MouseMove, 532, 271, 10
 	Sleep, 200
 	Send, {LButton}
 	Sleep, 500
@@ -359,7 +359,7 @@ Voltar(){
 
 Heroes(){
 	
-	MouseMove, 1100, 609, 10
+	MouseMove, 1381, 779, 10
 	Sleep, 200
 	Send, {LButton}
 	Sleep, 500
