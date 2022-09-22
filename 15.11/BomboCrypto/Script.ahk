@@ -12,9 +12,6 @@ SetTimer, NewMap, 10000
 #persistent
 SetTimer, Erro, 10000
 
-#persistent
-SetTimer, Reconectar, 10000
-
 Erro(){
 	tentativas = 0
 		Loop{
@@ -66,6 +63,7 @@ Reconectar(){
 }
 
 Meta(){
+	Sleep 25000
 	tentativas = 0
 		Loop{
 			ImageSearch, FoundX, FoundY, 0 ,0, A_ScreenWidth, A_ScreenHeight, *50, metamask.png ;150
@@ -74,7 +72,7 @@ Meta(){
 				MouseMove, FoundX, FoundY, 2
 	    		Sleep, 150
 	    		Send, {LButton}
-	    		Sleep 5000
+	    		Sleep, 20000
 				Assinar()
 	    
 		}
@@ -104,9 +102,9 @@ Assinar(){
 		
 			if (ErrorLevel = 0){
 				MouseMove, FoundX, FoundY, 2
-	    		Sleep, 150
-	    		Send, {LButton}
-	    		Sleep 50000
+	    			Sleep, 150
+	    			Send, {LButton}
+	    			Sleep 50000
 				Start()
 	    
 		}
@@ -127,9 +125,9 @@ NewMap(){
 		
 			if (ErrorLevel = 0){
 				MouseMove, FoundX, FoundY, 2
-	    		Sleep, 150
-	    		Send, {LButton}
-	    		Sleep 500
+	    			Sleep, 150
+	    			Send, {LButton}
+	    			Sleep 500
 	    
 		}
 		if (ErrorLevel = 1){
@@ -273,7 +271,7 @@ VerificaTimeout(){
 
 
 Scroll(){
-	MouseMove, 779, 565
+	MouseMove, 650, 250
 	count = 0
 	Loop{
 		Send {WheelDown}
@@ -289,7 +287,7 @@ Scroll(){
 
 Start(){
 	
-	MouseMove, 997, 538, 10
+	MouseMove, 700, 350, 10
 	Sleep, 200
 	Send, {LButton}
 	Sleep, 500
@@ -425,7 +423,7 @@ tentativas = 0
 
 Xis(){
 	
-	MouseMove, 1030, 353, 10
+	MouseMove, 750, 190, 10
 	Sleep, 200
 	Send, {LButton}
 	Sleep, 500
@@ -433,7 +431,7 @@ Xis(){
 
 Voltar(){
 	
-	MouseMove, 532, 271, 10
+	MouseMove, 260, 120, 10
 	Sleep, 200
 	Send, {LButton}
 	Sleep, 500
@@ -441,7 +439,7 @@ Voltar(){
 
 Heroes(){
 	
-	MouseMove, 1381, 779, 10
+	MouseMove, 1100, 609, 10
 	Sleep, 200
 	Send, {LButton}
 	Sleep, 500
