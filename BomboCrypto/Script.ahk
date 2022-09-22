@@ -47,8 +47,6 @@ AntiIdle(){
 	tentativa = 0
 
 	Loop{
-		Reset()
-		Sleep, 2000
 		Voltar()
 		Heroes()
 		Xis()
@@ -76,40 +74,27 @@ MandaTrabalhar(){
 				MouseMove, FoundX, FoundY, 2
 	    		Sleep, 300
 	    		Send, {LButton}
-	    		Sleep, 1000
+	    		Sleep, 2000
 	    		
 					    		
-			}
-			if (ErrorLevel = 1){
-				Sleep, 100
-				ImageSearch, FoundX, FoundY, 0 ,0, A_ScreenWidth, A_ScreenHeight, *50, error.png ;150
-			
-				if (ErrorLevel = 0){
-					Cancela()
-					Sleep, 200
-						
-						    		
-				}
+		}
+		if (ErrorLevel = 1){
+			tentativas++
+			VerificaHouse()
+			Sleep, 300
+			VerificaTimeout()
+			Sleep, 300
+			if(tentativas > 2){
+				Sleep, 500
+				VerificaHouse()
 
-				if (ErrorLevel = 1){
-					tentativas++
-					VerificaHouse()
-					Sleep, 100
-					VerificaTimeout()
-					Sleep, 100
-					if(tentativas > 5){
-						Sleep, 500
-						VerificaHouse()
-						return
-						}
-					}
-					
-				
-			
-			
+				return
+		}
+		
+		
 
 
-			}				
+		}				
 	}
 }
 
@@ -120,7 +105,7 @@ VerificaHouse(){
 		
 			if (ErrorLevel = 0){
 				Cancela()
-				Sleep, 200
+				Sleep, 500
 				return	
 					    		
 			}
@@ -157,7 +142,6 @@ VerificaTimeout(){
 
 }
 
-
 Scroll(){
 	MouseMove, 650, 250
 	count = 0
@@ -165,7 +149,7 @@ Scroll(){
 		Send {WheelDown}
 		count++
 
-		if(count = 2200){
+		if(count = 780){
 		Sleep, 200
 		return
 		}
@@ -221,7 +205,7 @@ WaitPlay(){
 		tentativas = 0
 		
 		Loop{
-			ImageSearch, FoundX, FoundY, 0 ,0, A_ScreenWidth, A_ScreenHeight, *50, play.png ;150
+			ImageSearch, FoundX, FoundY, 0 ,0, A_ScreenWidth, A_ScreenHeight, *50, play2.png ;150
 		
 			if (ErrorLevel = 0){
 				
@@ -247,71 +231,65 @@ WaitPlay(){
 
 
 ForceReconect(){
-
+	Send, {F12}
+	Sleep, 4000
 	Reconect()
 
 	tentativas = 0
-	tentativas2 = 0
 	Loop{
 
 		ImageSearch, FoundX, FoundY, 0 ,0, A_ScreenWidth, A_ScreenHeight, *50, fail.png ;150
 		
 		if (ErrorLevel = 0){
-			Sleep, 1000
-			if(tentativas > 20){
-				Send, ^{F5}
-				Sleep, 5000
-				ForceReconect()
-				return
-			}
-					
+			
+					Send, +{F5}
+					WaitPlay()
+					Reconect()
+					tentativas = 0	
 				
 			}
 		if (ErrorLevel = 1){
-
-			ImageSearch, FoundX, FoundY, 0 ,0, A_ScreenWidth, A_ScreenHeight, *50, heroes.png ;150
-			
-			if (ErrorLevel = 0){
-					return
-				}	
-				
-			if (ErrorLevel = 1){
-
-				ImageSearch, FoundX, FoundY, 0 ,0, A_ScreenWidth, A_ScreenHeight, *50, ok.png ;150
-			
-					if (ErrorLevel = 0){
-							MouseMove,FoundX, FoundY
-							Sleep, 300
-							Send,{LButton}
-							Sleep, 300
-							MouseMove,FoundX, FoundY
-							Sleep, 300
-							Send,{LButton}
-							Sleep, 300
-							MouseMove,FoundX, FoundY
-							Sleep, 300
-							Send,{LButton}
-							Sleep, 15000
-							Reset()
-							return
-						}	
-
-				Sleep, 1000
+			Sleep, 1000
+			if(tentativas > 20){
+				Send, {F12}
+				EsperaDebug()
+				return
 			}
-			tentativas2++	
 		}
 		tentativas++
 	}				
 }
 
-	
+EsperaDebug(){
+		tentativas = 0
+		Loop{
+			ImageSearch, FoundX, FoundY, 0 ,0, A_ScreenWidth, A_ScreenHeight, *50, full.png ;150
+		
+			if (ErrorLevel = 0){
+				return
+					    		
+			}
+		if (ErrorLevel = 1){
+			Sleep, 1000
+			if(tentativas > 20){
+				Send, +{F5}
+				Sleep, 10000
+				ForceReconect()
+				return
+		}
+		tentativas++
+		}				
+	}	
+
+
+}	
 
 
 Reconect(){
 tentativas = 0
 		
 		Loop{
-			ImageSearch, FoundX, FoundY, 0 ,0, A_ScreenWidth, A_ScreenHeight, *50, play.png ;150
+			ImageSearch, FoundX, FoundY, 0 ,0, A_ScreenWidth, A_ScreenHeight, *50, play2.png ;150
 			Random var, 2, 20
 			if (ErrorLevel = 0){
 				MouseMove, FoundX+var, FoundY+var
@@ -372,10 +350,6 @@ End::
 	Script()
 	;Reset()
 	;Reconect()
-	return
-
-^End::
-	Scroll()
 	return
 
 Home::
